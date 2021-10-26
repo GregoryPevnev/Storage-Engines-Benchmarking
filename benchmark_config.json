@@ -1,7 +1,7 @@
 {
-    "documents": 1,
-    "document_key": "id",
-    "document_schema": {
+    "number_of_documents": 1,
+    "document_key_name": "id",
+    "document_prototype": {
         "id": -1,
         "username": "Greg"
     }
