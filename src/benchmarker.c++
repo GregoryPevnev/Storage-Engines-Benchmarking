@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include <nlohmann/json.hpp>
 
@@ -7,6 +6,19 @@
 using namespace std;
 
 using json = nlohmann::json;
+
+// Mismatch error
+
+struct mismatch_error {
+    string key;
+    string value;
+
+    string expected_key;
+
+    mismatch_error(string key, string value, string expected_key): key(key), value(value), expected_key(expected_key) {}
+};
+
+// Implementation
 
 void benchmarker::setup() {
     // TODO: Create randomly based on a timestamp -> "[timestamp]_data"
@@ -56,10 +68,7 @@ void benchmarker::read() {
         check_key = document[this->document_key_name].get<string>();
 
         if(check_key != key) {
-            // TODO: Throwing an error
-            cout << "MISMATCH" << endl;
-            cout << key << endl;
-            cout << value << endl;
+            throw mismatch_error(key, value, check_key);
         }
     }
 }
@@ -67,38 +76,4 @@ void benchmarker::read() {
 void benchmarker::teardown() {
     // TODO: Removing the current working directory -> "working_directory"
     this->ds->close();
-}
-
-benchmark_config load_benchmarking_config() {
-    // TODO: Reading config from a file -> Parsing as JSON
-    json config_data = {
-        {"number_of_documents", 1},
-        {"document_key_name", "key"},
-        {
-            {"key", "KEY"},
-            {"value", "some value for testing"}
-        }
-    };
-
-    benchmark_config config;
-
-    config.number_of_documents = config_data["number_of_documents"].get<long>();
-    config.document_key_name = config_data["document_key_name"].get<string>();
-    config.document_prototype = config_data["document_prototype"];
-
-    return config;
-}
-
-void benchmark_data_store(data_store* ds, benchmark_config config) {
-    benchmarker bench(ds, config.document_prototype, config.document_key_name, config.number_of_documents);
-
-    // TODO: Logging and Timing
-
-    bench.setup();
-
-    bench.write();
-
-    bench.read();
-
-    bench.teardown();
 }

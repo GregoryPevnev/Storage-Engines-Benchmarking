@@ -4,6 +4,8 @@
 
 #include "se_bench/data_stores/mock_data_store.h++"
 
+#define MOCK_KEY_NAME "id"
+
 using namespace std;
 
 using json = nlohmann::json;
@@ -23,7 +25,7 @@ string mock_data_store::load(string key) {
     cout << "Loading" << endl;
     cout << key << endl;
 
-    json result = {{"key", key}};
+    json result = {{MOCK_KEY_NAME, key}};
 
     return result.dump();
 }
