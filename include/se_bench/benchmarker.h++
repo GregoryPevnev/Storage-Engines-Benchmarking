@@ -50,6 +50,6 @@ public:
 
 benchmark_config load_benchmarking_config();
 
-void benchmark_data_store(data_store* ds, benchmark_config config);
+void benchmark_data_store(data_store* ds, benchmark_config config, bool with_info = false);
 
 #endif

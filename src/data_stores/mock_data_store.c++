@@ -16,14 +16,14 @@ void mock_data_store::open(string working_directory_path) {
 }
 
 void mock_data_store::save(string key, string value) {
-    cout << "Saving" << endl;
-    cout << key << endl;
-    cout << value << endl;
+    // cout << "Saving" << endl;
+    // cout << key << endl;
+    // cout << value << endl;
 }
 
 string mock_data_store::load(string key) {
-    cout << "Loading" << endl;
-    cout << key << endl;
+    // cout << "Loading" << endl;
+    // cout << key << endl;
 
     json result = {{MOCK_KEY_NAME, key}};
 

@@ -31,18 +31,16 @@ void benchmarker::setup() {
 
 long benchmarker::write() {
     string key;
-    json document;
     string value;
 
-    long total_size_written;
+    long total_size_written = 0;
 
     for(long document_num = 1; document_num <= this->number_of_documents; document_num++) {
         key = to_string(document_num);
 
-        document = this->document_prototype;
-        document[this->document_key_name] = key;
+        this->document_prototype[this->document_key_name] = key;
 
-        value = document.dump();
+        value = this->document_prototype.dump();
 
         this->ds->save(key, value);
 
