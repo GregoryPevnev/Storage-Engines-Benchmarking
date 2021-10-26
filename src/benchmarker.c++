@@ -1,11 +1,43 @@
 #include <string>
+#include <ctime>
+#include <filesystem>
 #include <nlohmann/json.hpp>
 
 #include "se_bench/benchmarker.h++"
 
+namespace fs = std::__fs::filesystem;
+
 using namespace std;
 
 using json = nlohmann::json;
+
+// Working-Directories operations (Creation and deletion)
+
+string new_working_directory_name() {
+    time_t t = time(0);
+
+    string time_suffix = to_string(t);
+
+    return "data_" + time_suffix;
+}
+
+string create_working_directory() {
+    fs::path tmp_directory = fs::temp_directory_path();
+    
+    string working_directory_name = new_working_directory_name();
+
+     fs::path working_directory = tmp_directory / working_directory_name;
+
+     fs::create_directories(working_directory);
+
+     return working_directory.u8string();
+}
+
+void delete_working_directory(string working_directory) {
+    fs::path del_path = fs::u8path(working_directory);
+
+    fs::remove_all(del_path);
+}
 
 // Mismatch error
 
@@ -21,10 +53,7 @@ struct mismatch_error {
 // Implementation
 
 void benchmarker::setup() {
-    // TODO: Create randomly based on a timestamp -> "[timestamp]_data"
-
-    // TODO: Creating the current working directory -> "working_directory"
-    this->working_directory = "test_working_directory";
+    this->working_directory = create_working_directory();
 
     this->ds->open(this->working_directory);
 }
@@ -72,6 +101,7 @@ void benchmarker::read() {
 }
 
 void benchmarker::teardown() {
-    // TODO: Removing the current working directory -> "working_directory"
     this->ds->close();
+
+    delete_working_directory(this->working_directory);
 }
