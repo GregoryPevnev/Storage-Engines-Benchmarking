@@ -1,0 +1,9 @@
+Total bytes written and read: 104888895
+
+Speed of writing and reading
+Writing total time: 22000 ms
+Reading total time: 16041 ms
+
+Throughput of writing and reading
+Writing throughput: 4767 bytes/ms
+Reading throughput: 6538 bytes/ms

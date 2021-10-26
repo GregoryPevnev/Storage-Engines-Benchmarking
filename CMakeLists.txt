@@ -39,30 +39,30 @@ set (IncludePath /usr/local/inlcude) # Configuration: Specify the path pointing 
 # TODO: Uncomment when implemented
 
 # # SQLite3 Storge-Engine benchmarking setup
-add_executable(
-    bench_sqlite3
-    src/runners/sqlite3_benchmark_runner.c++
-    src/data_stores/sqlite3_data_store.c++
-    src/benchmarker.c++
-    src/benchmarker_config.c++
-    src/benchmarker_utils.c++
-    src/benchmark_runner.c++
-)
-target_include_directories(bench_sqlite3 PUBLIC ${IncludePath} ./include)
-target_link_libraries(bench_sqlite3 PRIVATE sqlite3 nlohmann_json::nlohmann_json)
-
-# # ForestDB Storge-Engine benchmarking setup
 # add_executable(
-#     bench_forestdb
-#     src/runners/forestdb_benchmark_runner.c++
-#     src/data_stores/forestdb_data_store.c++
+#     bench_sqlite3
+#     src/runners/sqlite3_benchmark_runner.c++
+#     src/data_stores/sqlite3_data_store.c++
 #     src/benchmarker.c++
 #     src/benchmarker_config.c++
 #     src/benchmarker_utils.c++
 #     src/benchmark_runner.c++
 # )
-# target_include_directories(bench_forestdb PUBLIC ${IncludePath} ./include)
-# target_link_libraries(bench_forestdb PRIVATE ${ForestDB} nlohmann_json::nlohmann_json)
+# target_include_directories(bench_sqlite3 PUBLIC ${IncludePath} ./include)
+# target_link_libraries(bench_sqlite3 PRIVATE sqlite3 nlohmann_json::nlohmann_json)
+
+# # ForestDB Storge-Engine benchmarking setup
+add_executable(
+    bench_forestdb
+    src/runners/forestdb_benchmark_runner.c++
+    src/data_stores/forestdb_data_store.c++
+    src/benchmarker.c++
+    src/benchmarker_config.c++
+    src/benchmarker_utils.c++
+    src/benchmark_runner.c++
+)
+target_include_directories(bench_forestdb PUBLIC ${IncludePath} ./include)
+target_link_libraries(bench_forestdb PRIVATE ${ForestDB} nlohmann_json::nlohmann_json)
 
 # # LevelDB Storge-Engine benchmarking setup
 # add_executable(
