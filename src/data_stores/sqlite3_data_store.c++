@@ -1,9 +1,9 @@
-#include <iostream>
 #include <string>
 
 #include "sqlite3.h"
 
 #include "se_bench/data_stores/sqlite3_data_store.h++"
+#include "se_bench/file_utilities.h++"
 
 using namespace std;
 
@@ -38,8 +38,8 @@ static int selection_callback(void* data, int columns, char** values, char** col
 
 // Data Store
 
-void sqlite3_data_store::open(string working_directory_path) {
-    string db_path = working_directory_path + "/bench.db";
+void sqlite3_data_store::open(string working_directory) {
+    string db_path = working_directory_path(working_directory, "bench.db");
 
     int rc = sqlite3_open(db_path.c_str(), &this->db);
 

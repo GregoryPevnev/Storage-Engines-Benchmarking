@@ -3,14 +3,17 @@
 #include "libforestdb/forestdb.h"
 
 #include "se_bench/data_stores/forestdb_data_store.h++"
+#include "se_bench/file_utilities.h++"
 
 using namespace std;
 
-void forestdb_data_store::open(string working_directory_path) {
+void forestdb_data_store::open(string working_directory) {
+    string db_path = working_directory_path(working_directory, "bench");
+
     fdb_config config = fdb_get_default_config();
     fdb_kvs_config kvs_config = fdb_get_default_kvs_config();
 
-    this->status = fdb_open(&this->fhandle, "/tmp/db_filename", &config);
+    this->status = fdb_open(&this->fhandle, db_path.c_str(), &config);
 
     if (this->status != FDB_RESULT_SUCCESS) {
         throw "Could not open a ForestDB database file";
