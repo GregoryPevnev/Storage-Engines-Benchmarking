@@ -17,7 +17,7 @@ string setup_sql() {
 }
 
 string insertion_sql(string key, string value) {
-    return "INSERT INTO store(key, value) VALUES ('" + key + "', '" + value + "');";
+    return "BEGIN;INSERT INTO store(key, value) VALUES ('" + key + "', '" + value + "');COMMIT;";
 }
 
 string selection_sql(string key) {
