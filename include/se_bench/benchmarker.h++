@@ -10,7 +10,6 @@ using namespace std;
 
 class data_store {
 public:
-    // TODO: Using "path" datatype
     virtual void open(string working_directory_path) = 0;
 
     virtual string load(string key) = 0;
