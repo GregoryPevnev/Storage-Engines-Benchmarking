@@ -28,13 +28,17 @@ void benchmark_data_store(data_store* ds, benchmark_config config, bool with_inf
 
     // Setup
 
-    cout << "Setting up the benchmarking environment" << endl;
+    if (with_info) {
+        cout << "Setting up the benchmarking environment" << endl;
+    }
 
     bench.setup();
 
     // Writing
 
-    cout << "Writing mock data" << endl;
+    if (with_info) {
+        cout << "Writing mock data" << endl;
+    }
 
     start_time = current_time();
 
@@ -44,7 +48,9 @@ void benchmark_data_store(data_store* ds, benchmark_config config, bool with_inf
 
     // Reading
 
-    cout << "Reading mock data" << endl;
+    if (with_info) {
+        cout << "Reading mock data" << endl;
+    }
 
     start_time = current_time();
 
@@ -54,7 +60,9 @@ void benchmark_data_store(data_store* ds, benchmark_config config, bool with_inf
 
     // Cleanup
 
-    cout << "Cleaning up the benchmarking environment" << endl;
+    if (with_info) {
+        cout << "Cleaning up the benchmarking environment" << endl;
+    }
 
     bench.teardown();
 

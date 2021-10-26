@@ -13,6 +13,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 #    4) Having SQLite3 installed (https://github.com/sqlite/sqlite) -> Headers added to Include-Path and Library available globally
 #    5) Having ForestDB installed (https://github.com/couchbase/forestdb) -> Headers added to Include-Path and Library available at a certain location (SET THE VARIABLE)
 #    6) Having LevelDB installed (https://github.com/google/leveldb) -> Headers added to Include-Path and Library available at a certain location (SET THE VARIABLE)
+#    7) Installing IOSnoop Utility
 
 find_package(nlohmann_json 3.2.0 REQUIRED)
 find_package (SQLite3 3.0.0 REQUIRED)

@@ -48,7 +48,7 @@ public:
     void teardown(); // Cleaning up the connections, data and files
 };
 
-benchmark_config load_benchmarking_config();
+benchmark_config load_benchmarking_config(string config_path);
 
 void benchmark_data_store(data_store* ds, benchmark_config config, bool with_info = false);
 
