@@ -33,4 +33,4 @@ esac
 
 echo "Benchmarking speed and throughput"
 
-./$TARGET benchmark_config.json yes
+./$TARGET benchmark_config.json yes 0

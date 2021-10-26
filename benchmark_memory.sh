@@ -33,4 +33,4 @@ esac
 
 echo "Benchmarking memory usage"
 
-/usr/bin/time -l ./$TARGET benchmark_config.json
+/usr/bin/time -l ./$TARGET benchmark_config.json no 0

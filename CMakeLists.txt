@@ -52,27 +52,27 @@ target_include_directories(bench_sqlite3 PUBLIC ${IncludePath} ./include)
 target_link_libraries(bench_sqlite3 PRIVATE sqlite3 nlohmann_json::nlohmann_json)
 
 # # ForestDB Storge-Engine benchmarking setup
-add_executable(
-    bench_forestdb
-    src/runners/forestdb_benchmark_runner.c++
-    src/data_stores/forestdb_data_store.c++
-    src/benchmarker.c++
-    src/benchmarker_config.c++
-    src/benchmarker_utils.c++
-    src/benchmark_runner.c++
-)
-target_include_directories(bench_forestdb PUBLIC ${IncludePath} ./include)
-target_link_libraries(bench_forestdb PRIVATE ${ForestDB} nlohmann_json::nlohmann_json)
+# add_executable(
+#     bench_forestdb
+#     src/runners/forestdb_benchmark_runner.c++
+#     src/data_stores/forestdb_data_store.c++
+#     src/benchmarker.c++
+#     src/benchmarker_config.c++
+#     src/benchmarker_utils.c++
+#     src/benchmark_runner.c++
+# )
+# target_include_directories(bench_forestdb PUBLIC ${IncludePath} ./include)
+# target_link_libraries(bench_forestdb PRIVATE ${ForestDB} nlohmann_json::nlohmann_json)
 
 # # LevelDB Storge-Engine benchmarking setup
-add_executable(
-    bench_leveldb
-    src/runners/leveldb_benchmark_runner.c++
-    src/data_stores/leveldb_data_store.c++
-    src/benchmarker.c++
-    src/benchmarker_config.c++
-    src/benchmarker_utils.c++
-    src/benchmark_runner.c++
-)
-target_include_directories(bench_leveldb PUBLIC ${IncludePath} ./include)
-target_link_libraries(bench_leveldb PRIVATE ${LevelDB} nlohmann_json::nlohmann_json)
+# add_executable(
+#     bench_leveldb
+#     src/runners/leveldb_benchmark_runner.c++
+#     src/data_stores/leveldb_data_store.c++
+#     src/benchmarker.c++
+#     src/benchmarker_config.c++
+#     src/benchmarker_utils.c++
+#     src/benchmark_runner.c++
+# )
+# target_include_directories(bench_leveldb PUBLIC ${IncludePath} ./include)
+# target_link_libraries(bench_leveldb PRIVATE ${LevelDB} nlohmann_json::nlohmann_json)

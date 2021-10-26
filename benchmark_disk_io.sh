@@ -35,8 +35,8 @@ echo "Benchmarking disk IO"
 
 rm -rf ./disk_info
 
-# Note: Waiting for 3s for IO-Snoop to start up
-sleep 3 && ./$TARGET benchmark_config.json && echo "DONE (Can close)" &
+# Waiting for 10s for IO-Snoop to start up
+./$TARGET benchmark_config.json no 10 &
 
 iosnoop -p $! > ./disk_info
 

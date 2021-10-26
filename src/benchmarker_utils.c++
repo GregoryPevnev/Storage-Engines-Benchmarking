@@ -68,15 +68,19 @@ void benchmark_data_store(data_store* ds, benchmark_config config, bool with_inf
 
     // Information
 
-    if (with_info) {
-        cout << "Total bytes written and read: " << total_volume << endl;
+    if (!with_info) return;
 
-        cout << endl << "Speed of writing and reading" << endl;
-        cout << "Writing total time: " << total_write_time << " ms" << endl;
-        cout << "Reading total time: " << total_read_time << " ms" << endl;
+    // Rounding up (At least some time was taken)
+    total_write_time = total_write_time == 0 ? 1 : total_write_time;
+    total_read_time = total_read_time == 0 ? 1 : total_read_time;
 
-        cout << endl << "Throughput of writing and reading" << endl;
-        cout << "Writing throughput: " << (total_volume / total_write_time) << " bytes/ms" << endl;
-        cout << "Reading throughput: " << (total_volume / total_read_time) << " bytes/ms" << endl;
-    }
+    cout << "Total bytes written and read: " << total_volume << endl;
+
+    cout << endl << "Speed of writing and reading" << endl;
+    cout << "Writing total time: " << total_write_time << " ms" << endl;
+    cout << "Reading total time: " << total_read_time << " ms" << endl;
+
+    cout << endl << "Throughput of writing and reading" << endl;
+    cout << "Writing throughput: " << ((long)(total_volume / total_write_time)) << " bytes/ms" << endl;
+    cout << "Reading throughput: " << ((long)(total_volume / total_read_time)) << " bytes/ms" << endl;
 }
