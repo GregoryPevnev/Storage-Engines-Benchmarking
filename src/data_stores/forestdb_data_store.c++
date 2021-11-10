@@ -26,33 +26,47 @@ void forestdb_data_store::open(string working_directory) {
     }
 }
 
-void forestdb_data_store::save(string key, string value) {
-    this->status = fdb_set_kv(this->db, key.c_str(), key.size(), value.c_str(), value.size());
-
-    if (this->status != FDB_RESULT_SUCCESS) {
-        throw "Could not save a key-value pair in ForestDB";
-    }
-
-    this->status = fdb_commit(this->fhandle, FDB_COMMIT_NORMAL);
-
-    if (this->status != FDB_RESULT_SUCCESS) {
-        throw "Could not commit a key-value pair in ForestDB";
-    }
-}
-
-string forestdb_data_store::load(string key) {
+string forestdb_data_store::read(string key) {
     size_t value_len;
     void *value;
 
     this->status = fdb_get_kv(this->db, key.c_str(), key.size(), &value, &value_len);
 
     if (this->status != FDB_RESULT_SUCCESS) {
-        throw "Could not load a key-value pair in ForestDB";
+        throw "Could not read a key-value pair in ForestDB";
     }
 
     string str_value((char*) value, value_len);
 
     return str_value;
+}
+
+void forestdb_data_store::write(string key, string record) {
+    this->status = fdb_set_kv(this->db, key.c_str(), key.size(), record.c_str(), record.size());
+
+    if (this->status != FDB_RESULT_SUCCESS) {
+        throw "Could not write a key-value pair in ForestDB";
+    }
+
+    this->status = fdb_commit(this->fhandle, FDB_COMMIT_NORMAL);
+
+    if (this->status != FDB_RESULT_SUCCESS) {
+        throw "Could not commit writing of a key-value pair in ForestDB";
+    }
+}
+
+void forestdb_data_store::remove(string key) {
+    this->status = fdb_del_kv(this->db, key.c_str(), key.size());
+
+    if (this->status != FDB_RESULT_SUCCESS) {
+        throw "Could not delete a key-value pair in ForestDB";
+    }
+
+    this->status = fdb_commit(this->fhandle, FDB_COMMIT_NORMAL);
+
+    if (this->status != FDB_RESULT_SUCCESS) {
+        throw "Could not commit deletion of a key-value pair in ForestDB";
+    }
 }
 
 void forestdb_data_store::close() {

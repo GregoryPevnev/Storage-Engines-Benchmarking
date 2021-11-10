@@ -40,7 +40,7 @@ long benchmarker::write() {
 
         value = this->document_prototype.dump();
 
-        this->ds->save(key, value);
+        this->ds->write(key, value);
 
         total_size_written += value.size();
     }
@@ -57,7 +57,7 @@ void benchmarker::read() {
     for(long document_num = 1; document_num <= this->number_of_documents; document_num++) {
         key = to_string(document_num);
 
-        value = this->ds->load(key);
+        value = this->ds->read(key);
 
         document = json::parse(value);
 

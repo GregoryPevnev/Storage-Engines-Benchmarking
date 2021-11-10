@@ -16,12 +16,16 @@ string setup_sql() {
     return table_setup + index_setup;
 }
 
+string selection_sql(string key) {
+    return "SELECT value FROM store WHERE key = '" + key + "';";
+}
+
 string insertion_sql(string key, string value) {
     return "BEGIN;INSERT INTO store(key, value) VALUES ('" + key + "', '" + value + "');COMMIT;";
 }
 
-string selection_sql(string key) {
-    return "SELECT value FROM store WHERE key = '" + key + "';";
+string deletion_sql(string key) {
+    return "BEGIN;DELETE FROM store WHERE key = '" + key + "';COMMIT;";
 }
 
 // Query Processing
@@ -51,28 +55,18 @@ void sqlite3_data_store::open(string working_directory) {
 
     rc = sqlite3_exec(this->db, setup_sql().c_str(), NULL, 0, &error_message);
 
-    if(rc) {
+    if (rc) {
         throw error_message;
     }
 }
 
-void sqlite3_data_store::save(string key, string value) {
-    char* error_message;
-
-    int rc = sqlite3_exec(this->db, insertion_sql(key, value).c_str(), NULL, 0, &error_message);
-
-    if(rc) {
-        throw error_message;
-    }
-}
-
-string sqlite3_data_store::load(string key) {
+string sqlite3_data_store::read(string key) {
     char* error_message;
     string value = "";
 
     int rc = sqlite3_exec(this->db, selection_sql(key).c_str(), selection_callback, &value, &error_message);
 
-    if(rc) {
+    if (rc) {
         throw error_message;
     }
 
@@ -81,6 +75,26 @@ string sqlite3_data_store::load(string key) {
     }
 
     return value;
+}
+
+void sqlite3_data_store::write(string key, string record) {
+    char* error_message;
+
+    int rc = sqlite3_exec(this->db, insertion_sql(key, record).c_str(), NULL, 0, &error_message);
+
+    if (rc) {
+        throw error_message;
+    }
+}
+
+void sqlite3_data_store::remove(string key) {
+    char* error_message;
+
+    int rc = sqlite3_exec(this->db, deletion_sql(key).c_str(), NULL, 0, &error_message);
+
+    if (rc) {
+        throw error_message;
+    }
 }
 
 void sqlite3_data_store::close() {

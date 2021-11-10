@@ -11,12 +11,14 @@ using json = nlohmann::json;
 
 void mock_data_store::open(string working_directory_path) {}
 
-void mock_data_store::save(string key, string value) {}
-
-string mock_data_store::load(string key) {
+string mock_data_store::read(string key) {
     json result = {{MOCK_KEY_NAME, key}};
 
     return result.dump();
 }
+
+void mock_data_store::write(string key, string record) {}
+
+void mock_data_store::remove(string key) {}
 
 void mock_data_store::close() {}

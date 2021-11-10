@@ -12,9 +12,11 @@ class data_store {
 public:
     virtual void open(string working_directory_path) = 0;
 
-    virtual string load(string key) = 0;
+    virtual string read(string key) = 0;
 
-    virtual void save(string key, string value) = 0;
+    virtual void write(string key, string record) = 0;
+
+    virtual void remove(string key) = 0;
 
     virtual void close() = 0;
 };

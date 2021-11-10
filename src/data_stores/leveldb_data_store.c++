@@ -22,22 +22,7 @@ void leveldb_data_store::open(string working_directory) {
     }
 }
 
-void leveldb_data_store::save(string key, string value) {
-    leveldb::WriteOptions options;
-
-    // Would make it as bad as SQLite (Even worse in some cases)
-    // options.sync = true;
-
-    this->status = this->db->Put(options, key, value);
-
-    if(!status.ok()) {
-        string err = status.ToString();
-
-        throw err;
-    }
-}
-
-string leveldb_data_store::load(string key) {
+string leveldb_data_store::read(string key) {
     leveldb::ReadOptions options;
 
     string value;
@@ -51,6 +36,36 @@ string leveldb_data_store::load(string key) {
     }
 
     return value;
+}
+
+void leveldb_data_store::write(string key, string record) {
+    leveldb::WriteOptions options;
+
+    // Would make it as bad as SQLite (Even worse in some cases)
+    // options.sync = true;
+
+    this->status = this->db->Put(options, key, record);
+
+    if(!status.ok()) {
+        string err = status.ToString();
+
+        throw err;
+    }
+}
+
+void leveldb_data_store::remove(string key) {
+    leveldb::WriteOptions options;
+
+    // Would make it as bad as SQLite (Even worse in some cases)
+    // options.sync = true;
+
+    this->status = this->db->Delete(options, key);
+
+    if(!status.ok()) {
+        string err = status.ToString();
+
+        throw err;
+    }
 }
 
 void leveldb_data_store::close() {
