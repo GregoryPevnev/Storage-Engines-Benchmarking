@@ -21,7 +21,7 @@ long time_diff(high_resolution_clock::time_point start_time, high_resolution_clo
 
 void benchmark_data_store(data_store* ds, benchmark_config config, bool with_info) {
     high_resolution_clock::time_point start_time, end_time;
-    long total_read_time, total_write_time;
+    long total_read_time, total_write_time, total_delete_time;
     long total_volume;
 
     benchmarker bench(ds, config.document_prototype, config.document_key_name, config.number_of_documents);
@@ -58,6 +58,18 @@ void benchmark_data_store(data_store* ds, benchmark_config config, bool with_inf
 
     total_read_time = time_diff(start_time, current_time());
 
+    // Deleting
+
+    if (with_info) {
+        cout << "Deleting mock data" << endl;
+    }
+
+    start_time = current_time();
+
+    bench.remove();
+
+    total_delete_time = time_diff(start_time, current_time());
+
     // Cleanup
 
     if (with_info) {
@@ -73,14 +85,17 @@ void benchmark_data_store(data_store* ds, benchmark_config config, bool with_inf
     // Rounding up (At least some time was taken)
     total_write_time = total_write_time == 0 ? 1 : total_write_time;
     total_read_time = total_read_time == 0 ? 1 : total_read_time;
+    total_delete_time = total_delete_time == 0 ? 1 : total_delete_time;
 
     cout << "Total bytes written and read: " << total_volume << endl;
 
-    cout << endl << "Speed of writing and reading" << endl;
+    cout << endl << "Total time of operations:" << endl;
     cout << "Writing total time: " << total_write_time << " ms" << endl;
     cout << "Reading total time: " << total_read_time << " ms" << endl;
+    cout << "Deleting total time: " << total_delete_time << " ms" << endl;
 
-    cout << endl << "Throughput of writing and reading" << endl;
+    cout << endl << "Throughput of operations:" << endl;
     cout << "Writing throughput: " << ((long)(total_volume / total_write_time)) << " bytes/ms" << endl;
     cout << "Reading throughput: " << ((long)(total_volume / total_read_time)) << " bytes/ms" << endl;
+    cout << "Deleting throughput: " << ((long)(total_volume / total_delete_time)) << " bytes/ms" << endl;
 }

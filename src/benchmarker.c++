@@ -69,6 +69,16 @@ void benchmarker::read() {
     }
 }
 
+void benchmarker::remove() {
+    string key;
+
+    for(long document_num = 1; document_num <= this->number_of_documents; document_num++) {
+        key = to_string(document_num);
+
+        this->ds->remove(key);
+    }
+}
+
 void benchmarker::teardown() {
     this->ds->close();
 

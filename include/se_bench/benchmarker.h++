@@ -42,9 +42,11 @@ public:
 
     void setup(); // Preparing for reading and writing
 
-    long write(); // Writing the specified number of documents according to the prototype -> Returning the total size
+    long write(); // Writing the specified number of documents according to the prototype -> Returning the total size => Write performance
 
-    void read(); // Reading all the written documents and verifying their correctness
+    void read(); // Reading all the written documents and verifying their correctness => Read performance
+
+    void remove(); // Removing all the written documents one by one => Deletion performance
 
     void teardown(); // Cleaning up the connections, data and files
 };
