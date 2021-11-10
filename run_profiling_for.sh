@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PROFILING_METRICS_PATH="./metrics/profiling"
+
 STORAGE_ENGINE="$1"
 
 case $STORAGE_ENGINE in
@@ -30,12 +32,19 @@ case $STORAGE_ENGINE in
     ;;
 esac
 
-echo "Benchmarking disk IO"
+WORKLOAD="$2"
 
-rm -rf ./disk_info
+if [ -z "$WORKLOAD" ]
+  then
+    echo "INVALID WORKLOAD SUPPLIED"
+    exit 1
+fi
+
+echo "Profiling disk IO"
+
+rm -rf "$PROFILING_METRICS_PATH/$STORAGE_ENGINE/$WORKLOAD"
 
 # Waiting for 10s for IO-Snoop to start up
-./$TARGET config.json no 10 &
+./$TARGET config.json $WORKLOAD no 10 &
 
-iosnoop -p $! > ./disk_info
-
+iosnoop -p $! > "$PROFILING_METRICS_PATH/$STORAGE_ENGINE/$WORKLOAD"

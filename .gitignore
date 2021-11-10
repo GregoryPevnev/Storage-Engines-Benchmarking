@@ -6,5 +6,5 @@
 # Build-Files
 /build
 
-# Benchmarking output
-/disk_info
+# Disk IO profiling output
+/disk_io_profile

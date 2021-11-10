@@ -25,7 +25,7 @@ benchmark_config load_benchmarking_config(string config_path) {
 
     benchmark_config config;
 
-    config.number_of_documents = config_data["number_of_documents"].get<long>();
+    config.number_of_documents = -1; // Has to be supplied from the command-line
     config.document_key_name = config_data["document_key_name"].get<string>();
     config.document_prototype = config_data["document_prototype"];
 

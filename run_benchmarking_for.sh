@@ -30,6 +30,14 @@ case $STORAGE_ENGINE in
     ;;
 esac
 
-echo "Benchmarking speed and throughput"
+WORKLOAD="$2"
 
-./$TARGET config.json yes 0
+if [ -z "$WORKLOAD" ]
+  then
+    echo "INVALID WORKLOAD SUPPLIED"
+    exit 1
+fi
+
+echo "Benchmarking speed and throughput with a workload of $WORKLOAD document(s)"
+
+./$TARGET config.json $WORKLOAD yes 0

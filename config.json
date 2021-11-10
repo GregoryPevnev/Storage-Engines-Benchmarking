@@ -1,5 +1,4 @@
 {
-    "number_of_documents": 100,
     "document_key_name": "id",
     "document_prototype": {
         "id": "[KEY]",
