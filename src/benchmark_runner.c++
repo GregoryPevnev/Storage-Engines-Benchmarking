@@ -35,7 +35,7 @@ int run_benchmarking(data_store* ds, int argc, char** argv) {
     int seconds_to_wait = stoi(seconds_to_wait_str);
 
     if (number_of_documents <= 0) {
-        throw "Number of documentsmust be a positive number";
+        throw "Number of documents must be a positive number";
     }
 
     // Waiting / Sleeping if specified by the input

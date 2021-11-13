@@ -4,8 +4,7 @@
 STORAGE_ENGINES=( "sqlite3" "forestdb" "leveldb" )
 
 # Sizes of test workloads to be used for running the benchmarking on
-# WORKLOAD_SIZES=( 100 1000 10000 100000 )
-WORKLOAD_SIZES=( 1 10 100 )
+WORKLOAD_SIZES=( 100 1000 10000 100000 )
 
 # Path for outputting the benchmarking metrics (Speed and Throughput)
 BENCHMARKING_METRICS_PATH="./metrics/benchmarking"

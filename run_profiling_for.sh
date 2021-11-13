@@ -42,6 +42,8 @@ fi
 
 echo "Profiling disk IO"
 
+mkdir -p "$PROFILING_METRICS_PATH/$STORAGE_ENGINE"
+
 rm -rf "$PROFILING_METRICS_PATH/$STORAGE_ENGINE/$WORKLOAD"
 
 # Waiting for 10s for IO-Snoop to start up

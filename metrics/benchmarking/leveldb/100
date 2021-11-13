@@ -1,17 +1,22 @@
 Setting up the benchmarking environment
-Writing mock data
-Reading mock data
-Deleting mock data
+Writing workload
+Reading workload
+Deleting workload
+Mixed operations workload
 Cleaning up the benchmarking environment
-Total bytes written and read: 104592
 
 Total time of operations:
-Writing total time: 10 ms
-Reading total time: 14 ms
-Deleting total time: 1 ms
+Writing workload total time: 10 ms
+Reading workload total time: 14 ms
+Deleting workload total time: 1 ms
+Total bytes: 104592
+
+Mixed workload total time: 8 ms
+Mixed bytes: 34509
 
 Throughput of operations:
-Writing throughput: 10459 bytes/ms
-Reading throughput: 7470 bytes/ms
-Deleting throughput: 104592 bytes/ms
+Writing workload throughput: 10459 bytes/ms
+Reading workload throughput: 7470 bytes/ms
+Deleting workload throughput: 104592 bytes/ms
+Mixed workload throughput: 4313 bytes/ms
 Finished (Close the console if it is still open)

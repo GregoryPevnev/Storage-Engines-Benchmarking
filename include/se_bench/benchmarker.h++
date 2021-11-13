@@ -48,6 +48,8 @@ public:
 
     void remove(); // Removing all the written documents one by one => Deletion performance
 
+    long mixed(); // Performing mixed operations (Writing -> Reading -> Deleting)
+
     void teardown(); // Cleaning up the connections, data and files
 };
 
