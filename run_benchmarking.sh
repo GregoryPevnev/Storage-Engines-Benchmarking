@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # Specifying storage engines to be used for benchmarking
-STORAGE_ENGINES=( "sqlite3" "forestdb" "leveldb" )
+STORAGE_ENGINES=( "sqlite3" )
 
 # Sizes of test workloads to be used for running the benchmarking on
-WORKLOAD_SIZES=( 100 1000 10000 100000 )
+# WORKLOAD_SIZES=( 100 1000 10000 100000 )
+WORKLOAD_SIZES=( 5000 )
 
 # Path for outputting the benchmarking metrics (Speed and Throughput)
 BENCHMARKING_METRICS_PATH="./metrics/benchmarking"
@@ -22,13 +23,13 @@ do
   echo -e "\nStorage Engine:"
   echo "$se" | awk '{print toupper($0)}'
 
-  rm -rf "$BENCHMARKING_METRICS_PATH/$se"
-
   mkdir -p "$BENCHMARKING_METRICS_PATH/$se"
 
   for ws in "${WORKLOAD_SIZES[@]}"
   do
     echo "Workload Size: $ws"
+
+    rm -rf "$BENCHMARKING_METRICS_PATH/$se/$ws"
 
     "./build/bin/bench_$se" config.json $ws yes 0 > "$BENCHMARKING_METRICS_PATH/$se/$ws"
 
