@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Specifying storage engines to be used for benchmarking
-STORAGE_ENGINES=( "sqlite3" )
+STORAGE_ENGINES=( "sqlite3" "forestdb" "leveldb" )
 
 # Sizes of test workloads to be used for running the benchmarking on
 # WORKLOAD_SIZES=( 100 1000 10000 100000 )
-WORKLOAD_SIZES=( 5000 )
+WORKLOAD_SIZES=( 500000 )
 
 # Path for outputting the benchmarking metrics (Speed and Throughput)
 BENCHMARKING_METRICS_PATH="./metrics/benchmarking"
